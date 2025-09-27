@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-onchain`](https://www.npmjs.com/package/create-onchain).
 
 
@@ -38,6 +37,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 To learn more about OnchainKit, see our [documentation](https://docs.base.org/onchainkit).
 
 To learn more about Next.js, see the [Next.js documentation](https://nextjs.org/docs).
-=======
 
->>>>>>> a038afd9bb82652ee54723cc371d53252de1cc0c
+## Run tests:
+
+```bash
+forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage
+```
+
+This will generate a lcov.info file in the lcov folder. This is to help your ai with code coverage.
