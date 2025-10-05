@@ -27,7 +27,7 @@ contract BlemastTest is Test {
 
     function testPauseAndUnpause() public {
         blemast.mint(address(this), 100 ether);
-        assertEq(blemast.balanceOf(address(this)), 100 ether);
+        assertEq(blemast.balanceOf(address(this)), 1_000_100 ether);
 
         blemast.pause();
 
@@ -47,5 +47,16 @@ contract BlemastTest is Test {
         vm.expectRevert();
         blemast.unpause();
         vm.stopPrank();
+    }
+
+    function testBurn() public {
+        uint256 initialBalance = blemast.balanceOf(address(this));
+        blemast.burn(100 ether);
+        assertEq(blemast.balanceOf(address(this)), initialBalance - 100 ether);
+    }
+
+    function testNonces() public view {
+        uint256 nonce = blemast.nonces(address(this));
+        assertEq(nonce, 0);
     }
 }

@@ -48,12 +48,15 @@ $ anvil
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge create contracts/src/Blemast.sol:Blemast --rpc-url $BASE_SEPOLIA_RPC_URL --account deployer --broadcast  --constructor-args <public_wallet_address>
+
+$ forge script contracts/src/Blemast.sol:Blemast --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
 ### Cast
 
 ```shell
+$ cast call $COUNTER_CONTRACT_ADDRESS "number()(uint256)" --rpc-url $BASE_SEPOLIA_RPC_URL
 $ cast <subcommand>
 ```
 
