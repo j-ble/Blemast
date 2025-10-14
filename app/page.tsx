@@ -1,109 +1,55 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Wallet } from "@coinbase/onchainkit/wallet";
-import { Transaction, TransactionButton, TransactionStatus, TransactionStatusLabel, TransactionStatusAction } from "@coinbase/onchainkit/transaction";
-import { transferTokensCalls } from "./calls";
+import Image from 'next/image';
+import { Wallet } from '@coinbase/onchainkit/wallet';
+import { TransferForm } from '@/components/transfer/TransferForm';
+import { NetworkWarning } from '@/components/network/NetworkWarning';
+import { NetworkBadge } from '@/components/network/NetworkBadge';
 
+/**
+ * The main page of the Blemast token dashboard.
+ * It includes the wallet connection and the primary token interaction components.
+ */
 export default function Home() {
-  const [recipientAddress, setRecipientAddress] = useState("");
-  const [amount, setAmount] = useState("");
-
   return (
-    <div className={styles.container}>
-      <header className={styles.headerWrapper}>
-        <Wallet />
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <header className="flex justify-between items-center p-4 border-b bg-white shadow-sm">
+        <div className="flex items-center space-x-3">
+          <Image
+            src="/sphere.svg"
+            alt="Blemast Logo"
+            width={32}
+            height={32}
+          />
+          <h1 className="text-xl font-bold">Blemast</h1>
+        </div>
+        <div className="flex items-center space-x-4">
+          <NetworkBadge />
+          <Wallet />
+        </div>
       </header>
 
-      <div className={styles.content}>
-        <Image
-          priority
-          src="/sphere.svg"
-          alt="Sphere"
-          width={200}
-          height={200}
-        />
-        <h1 className={styles.title}>Blemast Token (BLE)</h1>
+      <main className="flex-grow p-4 md:p-8">
+        <NetworkWarning />
+        
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Token Dashboard
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-gray-600">
+              Interact with the Blemast (BLE) ERC20 token.
+            </p>
+          </div>
 
-        <p>
-          Interact with your Blemast ERC20 token on Base Sepolia
-        </p>
-
-        <div style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-          <h2>Transfer BLE Tokens</h2>
-          <input
-            type="text"
-            placeholder="Recipient Address (0x...)"
-            value={recipientAddress}
-            onChange={(e) => setRecipientAddress(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginBottom: '1rem',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Amount (in wei, e.g., 1000000000000000000 = 1 BLE)"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginBottom: '1rem',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
-
-          <Transaction
-            calls={transferTokensCalls(recipientAddress, amount || "0")}
-            chainId={84532}
-          >
-            <TransactionButton text="Transfer Tokens" />
-            <TransactionStatus>
-              <TransactionStatusLabel />
-              <TransactionStatusAction />
-            </TransactionStatus>
-          </Transaction>
+          {/* This will be replaced by the DashboardGrid in Phase 2 */}
+          <div className="w-full max-w-md mx-auto">
+              <TransferForm />
+          </div>
         </div>
+      </main>
 
-        <h2 className={styles.componentsTitle}>Explore Components</h2>
-
-        <ul className={styles.components}>
-          {[
-            {
-              name: "Transaction",
-              url: "https://docs.base.org/onchainkit/transaction/transaction",
-            },
-            {
-              name: "Swap",
-              url: "https://docs.base.org/onchainkit/swap/swap",
-            },
-            {
-              name: "Checkout",
-              url: "https://docs.base.org/onchainkit/checkout/checkout",
-            },
-            {
-              name: "Wallet",
-              url: "https://docs.base.org/onchainkit/wallet/wallet",
-            },
-            {
-              name: "Identity",
-              url: "https://docs.base.org/onchainkit/identity/identity",
-            },
-          ].map((component) => (
-            <li key={component.name}>
-              <a target="_blank" rel="noreferrer" href={component.url}>
-                {component.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <footer className="p-4 text-center border-t text-sm text-gray-500 bg-white">
+        &copy; {new Date().getFullYear()} Blemast. All rights reserved.
+      </footer>
     </div>
   );
 }
