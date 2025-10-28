@@ -12,52 +12,64 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      {/* Sticky Header */}
       <header className={styles.headerWrapper}>
+        <div className={styles.logoContainer}>
+          <Image
+            src="/sphere.svg"
+            alt="Blemast Logo"
+            width={40}
+            height={40}
+            className={styles.logo}
+          />
+          <span className={styles.brandName}>Blemast</span>
+        </div>
         <Wallet />
       </header>
 
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <Image
+            priority
+            src="/sphere.svg"
+            alt="Blemast Sphere"
+            width={120}
+            height={120}
+            style={{ marginBottom: '2rem' }}
+          />
+          <h1 className={styles.title}>Build Beyond with Blemast</h1>
+          <p className={styles.subtitle}>
+            A modern ERC20 token on Base chain. Transfer, manage, and interact with BLE tokens seamlessly on Base Sepolia testnet.
+          </p>
+        </div>
+      </section>
+
+      {/* Content Section */}
       <div className={styles.content}>
-        <Image
-          priority
-          src="/sphere.svg"
-          alt="Sphere"
-          width={200}
-          height={200}
-        />
-        <h1 className={styles.title}>Blemast Token (BLE)</h1>
+        {/* Transfer Card */}
+        <div className={styles.transferCard}>
+          <h2 className={styles.cardTitle}>Transfer BLE Tokens</h2>
 
-        <p>
-          Interact with your Blemast ERC20 token on Base Sepolia
-        </p>
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Recipient Address (0x...)"
+              value={recipientAddress}
+              onChange={(e) => setRecipientAddress(e.target.value)}
+              className={styles.input}
+            />
+          </div>
 
-        <div style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-          <h2>Transfer BLE Tokens</h2>
-          <input
-            type="text"
-            placeholder="Recipient Address (0x...)"
-            value={recipientAddress}
-            onChange={(e) => setRecipientAddress(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginBottom: '1rem',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Amount (in wei, e.g., 1000000000000000000 = 1 BLE)"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginBottom: '1rem',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          />
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Amount (in wei, e.g., 1000000000000000000 = 1 BLE)"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className={styles.input}
+            />
+          </div>
 
           <Transaction
             calls={transferTokensCalls(recipientAddress, amount || "0")}
@@ -71,38 +83,46 @@ export default function Home() {
           </Transaction>
         </div>
 
-        <h2 className={styles.componentsTitle}>Explore Components</h2>
+        {/* Components Section */}
+        <div className={styles.componentsSection}>
+          <h2 className={styles.componentsTitle}>Explore OnchainKit Components</h2>
 
-        <ul className={styles.components}>
-          {[
-            {
-              name: "Transaction",
-              url: "https://docs.base.org/onchainkit/transaction/transaction",
-            },
-            {
-              name: "Swap",
-              url: "https://docs.base.org/onchainkit/swap/swap",
-            },
-            {
-              name: "Checkout",
-              url: "https://docs.base.org/onchainkit/checkout/checkout",
-            },
-            {
-              name: "Wallet",
-              url: "https://docs.base.org/onchainkit/wallet/wallet",
-            },
-            {
-              name: "Identity",
-              url: "https://docs.base.org/onchainkit/identity/identity",
-            },
-          ].map((component) => (
-            <li key={component.name}>
-              <a target="_blank" rel="noreferrer" href={component.url}>
-                {component.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+          <ul className={styles.components}>
+            {[
+              {
+                name: "Transaction",
+                url: "https://docs.base.org/onchainkit/transaction/transaction",
+              },
+              {
+                name: "Swap",
+                url: "https://docs.base.org/onchainkit/swap/swap",
+              },
+              {
+                name: "Checkout",
+                url: "https://docs.base.org/onchainkit/checkout/checkout",
+              },
+              {
+                name: "Wallet",
+                url: "https://docs.base.org/onchainkit/wallet/wallet",
+              },
+              {
+                name: "Identity",
+                url: "https://docs.base.org/onchainkit/identity/identity",
+              },
+            ].map((component) => (
+              <li key={component.name}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={component.url}
+                  className={styles.componentLink}
+                >
+                  {component.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
