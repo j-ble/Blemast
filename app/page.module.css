@@ -51,6 +51,36 @@
   transition: color 0.2s ease;
 }
 
+/* Navigation */
+.nav {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.navButton {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--foreground);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton:hover {
+  background: var(--overlay);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(77, 166, 255, 0.15);
+}
+
 /* Hero Section */
 .hero {
   min-height: 80vh;
@@ -95,7 +125,45 @@
   gap: var(--space-4);
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: var(--space-12);
+  margin-top: var(--space-8);
+}
+
+.ctaPrimary {
+  background: var(--accent-blue);
+  color: #fff;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 2px solid var(--accent-blue);
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.ctaSecondary {
+  background: transparent;
+  color: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ctaSecondary:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(77, 166, 255, 0.4);
 }
 
 /* Content Section */
@@ -202,6 +270,19 @@
 @media (max-width: 768px) {
   .headerWrapper {
     padding: var(--space-3) var(--space-4);
+  }
+
+  .nav {
+    gap: var(--space-2);
+  }
+
+  .navButton {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.875rem;
+  }
+
+  .brandName {
+    font-size: 1.125rem;
   }
 
   .hero {
